@@ -1,0 +1,83 @@
+"""
+Finally works
+"""
+
+import random
+activities = []
+# Activities are empty because the user inputs activities themself
+
+def add_activity():
+    """Adds an activity to list activities"""
+    print("Please enter your choices one at a time. When you are finished, just say 'done'. ")
+    while True:
+        activity = input("")
+        if activity == "done" or activity == "Done":
+            break
+        print("You have entered ", activity, ".")
+        satisfied = input("Are you satisfied with this entry? ")
+        if satisfied == "Yes" or satisfied == "yes" or satisfied == "yeah" or satisfied == "yea":
+            activities.append(activity)
+            print("It was added to your list. Keep going or type 'done' to be finished.")
+            continue
+        if satisfied == "No" or satisfied == "no":
+            print("okay, it was not added to the list. Keep going or type 'done' to be finished. ")
+            continue
+        elif satisfied != "Yes" or satisfied != "yes" or satisfied != "yeah" or satisfied != "yea" or satisfied != "No" or satisfied != "no":
+            print("I did not understand your answer, so it wasn't added to the list. Please continue,\n"
+                  " or type 'done' to be finished. ")
+            continue
+
+
+def generate_activity():
+    """Chooses a choice at random from list activities"""
+    while True:
+        chosen_activity = random.choice(activities)
+        print("\nHow about", chosen_activity, "? ")
+        satisfied = input("Would you like to do this activity, yes or no? ")
+        if satisfied == "yes" or satisfied == "Yes":
+            return
+        else:
+            print("Okay, why don't you try this instead? ")
+            continue
+
+
+def remove_from_list():
+    """Remove an item from list activities"""
+    while True:
+        print("Here is a list of all possible activities: ")
+        print(*activities, sep=", ")
+        print("To remove an entry from this list, enter it below. Or, type 'done' to be finished. ")
+        remover = input("")
+        if remover != "done":
+            activities.remove(remover)
+            print("The activity has been removed from the list. ")
+            continue
+        else:
+            return
+
+
+def front_end_screen():
+    """
+
+    This is supposed to be the front end menu
+
+    """
+    print("This is an app to help you when you can't decide what to do!\nFirst, we have to add some activities to choose from. ")
+    add_activity()
+    while True:
+        make_choices = int(input("To have an activity chosen for you at random, enter 1\nTo add more activities to the list, enter 2\nTo remove activities from the list, enter 3\n"
+                                 "To end this program, enter 4\n"))
+        if make_choices == 1:
+            generate_activity()
+            continue
+        if make_choices == 2:
+            add_activity()
+            continue
+        if make_choices == 3:
+            remove_from_list()
+            continue
+        if make_choices == 4:
+            print("Thanks for playing! Enjoy the activity you chose! ")
+            return
+
+front_end_screen()
